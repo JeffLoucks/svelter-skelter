@@ -15,7 +15,7 @@ Oh my! There seems to be a problem loading our pages! Can you fix the data loade
 
 ## Challenge 2
 
-Now that you've got the data loader working, a new entry foe has appeared. It appears to be a empty journal entry, and some... kind... of ... FORM!? EGADS!!
+Now that you've got the data loader working, a new foe has appeared. It appears to be a empty journal entry, and some... kind... of ... FORM!? EGADS!!
 
 Can you fix the form and connect it to a form action, and send the data to the component?
 
