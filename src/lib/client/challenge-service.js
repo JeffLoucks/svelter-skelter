@@ -1,5 +1,6 @@
 import { localEntries, challenge2Enabled } from "./local-state";
 import { get } from 'svelte/store';
+import { browser } from "$app/environment";
 
 //GET OUTTA HERE!!
 
@@ -43,7 +44,7 @@ function unlockFinalBoss() {
 	const entries = get(localEntries)
 	const finalEntry = {
 		title: "Challenge 3",
-		description: "Connect a backend service",
+		description: "Connect another service",
 		id: '3',
 		ownerId: '123456',
 		steps: [
@@ -53,7 +54,7 @@ function unlockFinalBoss() {
 			},
 			{
 				title: "Make it real? I don't know if I'm ready for this.",
-				body: "Well, you'll never be ready if you don't just commit and make the jump already! Make this project your own in whatever way you see fit. Some ideas are: connecting a database, changing this app entirely by using the existing forms to submit data to a backend service like an AI tool, or just give up."
+				body: "Well, you'll never be ready if you don't just commit and make the jump already! Make this project your own in whatever way you see fit. Some ideas are: connecting a database, changing this app entirely by using the existing forms to submit data to a backend service like an AI tool, use some other API to pull in data, or just add 'Svelte Master' to your resume and move on."
 			},
 			{
 				title: "I really am happy for you.",
@@ -64,9 +65,29 @@ function unlockFinalBoss() {
 	localEntries.set([...entries, finalEntry])
 }
 
+function submitChallenge2({ formData }) {
+	const post2 = {
+		title: 'Challenge 2',
+		id: '2',
+		ownerId: '123456',
+		steps: [
+			{
+				title: formData.get('title'),
+				body: formData.get('body')
+			}
+		],
+		description: formData.get('description'),
+	}
+	browser && localStorage.setItem('challenge2', JSON.stringify(post2));
+	return async({ update }) => {
+		update();
+	}
+}
+
 
 export {
 	loadDashboard,
 	unlockFinalBoss,
-	enableChallenge2
+	enableChallenge2,
+	submitChallenge2
 }

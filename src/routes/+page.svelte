@@ -1,7 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
 	import { localEntries, challenge2Enabled } from '$lib/client/local-state.js';
-	import { loadDashboard, unlockFinalBoss } from '$lib/client/challenge-service.js';
+	import { submitChallenge2, loadDashboard, unlockFinalBoss } from '$lib/client/challenge-service.js';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 
@@ -11,25 +11,6 @@
 		//onMount assures code is running the browser
 		loadDashboard(data);
 	})
-
-	function submitChallenge2({ formData }) {
-		const post2 = {
-			title: 'Challenge 2',
-			id: '2',
-			ownerId: '123456',
-			steps: [
-				{
-					title: formData.get('title'),
-					body: formData.get('body')
-				}
-			],
-			description: formData.get('description'),
-		}
-		browser && localStorage.setItem('challenge2', JSON.stringify(post2));
-		return async({ update }) => {
-			update();
-		}
-	}
 
 	$: user = data.user;
 	$: challenge3Enabled = $localEntries.length > 1 && $localEntries[1] && $localEntries[1]?.steps.length > 0;

@@ -35,7 +35,7 @@ function getEntryById(id, url) {
 					},
 					{
 						title: "Make it real? I don't know if I'm ready for this.",
-						body: "Well, you'll never be ready if you don't just commit and make the jump already! Make this project your own in whatever way you see fit. Some ideas are: connecting a database, changing this app entirely by using the existing forms to submit data to a backend service like an AI tool, use some other API to pull in data, or just add 'Svelte Master' to your resume and move on."
+						body: "Well, you'll never be ready if you don't just commit and make the jump already! Make this project your own in whatever way you see fit. Some ideas are: connecting a database, changing this app entirely by using the existing forms to submit data to a backend service like an AI tool, use some other API to pull in data, create more routes or just add 'Svelte Master' to your resume and move on."
 					},
 					{
 						title: "I really am happy for you.",
