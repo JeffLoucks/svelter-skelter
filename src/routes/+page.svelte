@@ -2,7 +2,8 @@
 	import { enhance } from '$app/forms';
 	import { localEntries, challenge2Enabled } from '$lib/client/local-state.js';
 	import { loadDashboard, unlockFinalBoss } from '$lib/client/challenge-service.js';
-  import { onMount } from 'svelte';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
 
 	export let data;
 
@@ -10,6 +11,25 @@
 		//onMount assures code is running the browser
 		loadDashboard(data);
 	})
+
+	function submitChallenge2({ formData }) {
+		const post2 = {
+			title: 'Challenge 2',
+			id: '2',
+			ownerId: '123456',
+			steps: [
+				{
+					title: formData.get('title'),
+					body: formData.get('body')
+				}
+			],
+			description: formData.get('description'),
+		}
+		browser && localStorage.setItem('challenge2', JSON.stringify(post2));
+		return async({ update }) => {
+			update();
+		}
+	}
 
 	$: user = data.user;
 	$: challenge3Enabled = $localEntries.length > 1 && $localEntries[1] && $localEntries[1]?.steps.length > 0;
@@ -37,14 +57,14 @@
 
 {#if $challenge2Enabled}
 	<section class="h-[300px] w-screen flex items-center justify-center">
-		<form method="POST" action="?/logentry" class="w-1/2" use:enhance>
+		<form method="POST" action="?/logentry" class="w-1/2" use:enhance={submitChallenge2}>
 			<div class="isolate -space-y-px rounded-md shadow-sm">
 				<div class="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
 					<label for="title" class="block text-xs font-medium text-gray-900">Title</label>
 					<input type="text" name="title" id="title" class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Journal Title">
 				</div>
 				<div class="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-					<label for="job-title" class="block text-xs font-medium text-gray-900">Description</label>
+					<label for="description" class="block text-xs font-medium text-gray-900">Description</label>
 					<input type="text" name="description" id="description" class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="What's the general idea here?">
 				</div>
 				<div class="overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">

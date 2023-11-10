@@ -4,15 +4,21 @@ import { get } from 'svelte/store';
 //GET OUTTA HERE!!
 
 function loadDashboard(data) {
+	const challenge2Cached = localStorage.getItem('challenge2') && JSON.parse(localStorage.getItem('challenge2')) || null;
 	if (!get(challenge2Enabled)) {
 		localEntries.set(data.journalEntries)
+	}
+	if (!get(challenge2Enabled) && challenge2Cached) {
+		challenge2Enabled.set(true);
+		localEntries.set([...data.journalEntries, challenge2Cached])
 	}
 }
 
 function enableChallenge2(data) {
 	const enabled = get(challenge2Enabled)
 	const currentEntries = get(localEntries);
-	if (!enabled) {
+	const challenge2Cached = localStorage.getItem('challenge2') && JSON.parse(localStorage.getItem('challenge2')) || null;
+	if (!enabled && !challenge2Cached) {
 		challenge2Enabled.set(true);
 		localEntries.set([...currentEntries, {
 			title: "Challenge 2",
@@ -21,6 +27,10 @@ function enableChallenge2(data) {
 			ownerId: '123456',
 			steps: []
 		}])
+	}
+	if (!enabled && challenge2Cached) {
+		challenge2Enabled.set(true);
+		localEntries.set([...currentEntries, challenge2Cached])
 	}
 
 	if (enabled && data.entry.id === '2' && data.entry.steps.length > 0) {

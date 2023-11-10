@@ -10,7 +10,8 @@
 		enableChallenge2(data)
 	})
 
-	$: entry = data.entry;
+	//If no entry comes from the server, then look in local state
+	let entry = data.entry.steps.length ? data.entry : $localEntries[data.entry.id - 1];
 
 </script>
 
