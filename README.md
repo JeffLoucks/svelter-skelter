@@ -1,10 +1,11 @@
-## Welcome to Svelte Basics!
+## Welcome to Svelter Skelter!
 
 This is a repo full of bugs and challenges for you to solve to learn the basics of modern SSR apps through SvelteKit. Yay! I'll leave breadcrumbs throughout the project to help you figure out what to do. Of course, you can always reach out to Jeff if you get really stuck.
 
 Important Notes: 
-You shouldn't have to dig into the $lib server or client code at all to fix these problems.
-Don't worry about exports from the challenge service. Those are files I made to keep the challenge moving in the background. Feel free to read through all the bad code I put in there once you complete all the challenges though!
+1. You shouldn't have to dig into the $lib server or client code at all to fix these problems.
+2. Don't worry about exports from the challenge service. Those are files I made to keep the challenge moving in the background. Feel free to read through all the bad code I put in there once you complete all the challenges though!
+3. I'm caching progress up through challenge 2 in localStorage. So, there's some overthought and unneeded complexity to attempt to give you a better learning experience. You shouldn't have any interactions with it, but if it causes any issues for you or confuses any topics then just let me know.
 
 
 ## Challenge 1
