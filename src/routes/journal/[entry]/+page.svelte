@@ -1,13 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
 	import { localEntries } from '$lib/client/local-state.js';
-	import { enableChallenge2 } from '$lib/client/challenge-service.js';
+	import challengeService from '$lib/client/challenge-service.js';
 
 	export let data;
 
 
 	onMount(() => {
-		enableChallenge2(data)
+		challengeService.enableChallenge2(data)
 	})
 
 	//If no entry comes from the server, then look in local state

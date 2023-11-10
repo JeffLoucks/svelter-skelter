@@ -1,7 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
 	import { localEntries, challenge2Enabled } from '$lib/client/local-state.js';
-	import { submitChallenge2, loadDashboard, unlockFinalBoss } from '$lib/client/challenge-service.js';
+	import challengeService from '$lib/client/challenge-service.js';
 	import { onMount } from 'svelte';
 
 	export let data;
@@ -9,7 +9,7 @@
 
 	onMount(() => {
 		//onMount assures code is running the browser
-		loadDashboard(data);
+		challengeService.loadDashboard(data);
 	})
 
 	$: user = data.user;
@@ -32,13 +32,13 @@
 
 	{#if challenge3Enabled && $localEntries.length < 3}
 		<div class="mb-8 mx-auto flex justify-end max-w-3xl text-base leading-7 text-gray-700">
-			<button type="button" on:click={unlockFinalBoss} class="inline-flex items-center rounded-md bg-indigo-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-400" disabled={!challenge3Enabled}>Unlock Final Challenge</button>
+			<button type="button" on:click={challengeService.unlockFinalBoss} class="inline-flex items-center rounded-md bg-indigo-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-400" disabled={!challenge3Enabled}>Unlock Final Challenge</button>
 		</div>
 	{/if}
 
 {#if $challenge2Enabled}
 	<section class="h-[300px] w-screen flex items-center justify-center">
-		<form method="POST" action="?/logentry" class="w-1/2" use:enhance={submitChallenge2}>
+		<form method="POST" action="?/logentry" class="w-1/2" use:enhance={challengeService.submitChallenge2}>
 			<div class="isolate -space-y-px rounded-md shadow-sm">
 				<div class="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
 					<label for="title" class="block text-xs font-medium text-gray-900">Title</label>

@@ -85,7 +85,7 @@ function submitChallenge2({ formData }) {
 }
 
 
-export {
+export default {
 	loadDashboard,
 	unlockFinalBoss,
 	enableChallenge2,
