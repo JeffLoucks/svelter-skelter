@@ -1,5 +1,7 @@
 import { writable } from "svelte/store";
 
+//DO NOT MODIFY... unless you want to break everything!
+
 // Svelte stores come built in with SvelteKit! So cool! This is how we are sharing data across components in the browser.
 // https://svelte.dev/docs/svelte-store
 

@@ -1,14 +1,16 @@
 ## Welcome to Svelte Basics!
 
-This is a repo full of bugs and challenges for you to solve to learn the basics of modern SSR apps through SvelteKit. Yay! I'll leave breadcrumbs throughout the project to help you figure out what to do. Of course, you can always reach out to Jeff if you get really stuck. There may be some frustrating parts to this project because it's not connected to a database and nothing persist (just like in life) after a refresh. I suppose I could have thought of a better way to do that, but it's too late now!
+This is a repo full of bugs and challenges for you to solve to learn the basics of modern SSR apps through SvelteKit. Yay! I'll leave breadcrumbs throughout the project to help you figure out what to do. Of course, you can always reach out to Jeff if you get really stuck.
 
-## Challenge 0
+Important Notes: 
+You shouldn't have to dig into the $lib server or client code at all to fix these problems.
+Don't worry about exports from the challenge service. Those are files I made to keep the challenge moving in the background. Feel free to read through all the bad code I put in there once you complete all the challenges though!
 
-Before we can start, you really gotta tell me who you are. I mean, we can't have just ANYONE learning Svelte. Look at the hooks.server.js file and see how we're trying to identify you. Fix that, and we can start really getting this working!
 
 ## Challenge 1
 
-Oh my! There seems to be a problem loading our journal entry. Can you fix the data loader to make sure the data is properly getting sent to the page?
+Oh my! There seems to be a problem loading our pages! Can you fix the data loaders to make sure the data is properly getting sent to each page?
+
 
 ## Challenge 2
 

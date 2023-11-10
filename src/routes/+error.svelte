@@ -1,5 +1,10 @@
 <script>
 	import { page } from '$app/stores';
+
+	// Error pages at the root of your Svelte apps are your "default" error pages.
+	// This will catch any errors that any child +error.svelte pages don't catch
+	// Look for where we are importing { error } from svelte, and you'll see how this get populated
+
 </script>
 
 <main class="flex items-center h-screen">

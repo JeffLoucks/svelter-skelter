@@ -1,19 +1,17 @@
 <script>
 	import { enhance } from '$app/forms';
 	import { localEntries, challenge2Enabled } from '$lib/client/local-state.js';
-	import { submitChallenge2, loadDashboard, unlockFinalBoss } from '$lib/client/challenge-service.js';
+	import challengeService from '$lib/client/challenge-service.js';
 	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
 
-	export let data;
-
+	//DON'T MODIFY onMount function
 	onMount(() => {
 		//onMount assures code is running the browser
-		loadDashboard(data);
+		challengeService.loadDashboard(data);
 	})
 
 	$: user = data.user;
-	$: challenge3Enabled = $localEntries.length > 1 && $localEntries[1] && $localEntries[1]?.steps.length > 0;
+	$: challenge3Enabled = $localEntries.length > 1 && $localEntries[1] && $localEntries[1]?.steps.length > 0; //DON'T MODIFY
 </script>
 
 <main class="mt-16 flex flex-col items-center">
@@ -32,13 +30,14 @@
 
 	{#if challenge3Enabled && $localEntries.length < 3}
 		<div class="mb-8 mx-auto flex justify-end max-w-3xl text-base leading-7 text-gray-700">
-			<button type="button" on:click={unlockFinalBoss} class="inline-flex items-center rounded-md bg-indigo-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-400" disabled={!challenge3Enabled}>Unlock Final Challenge</button>
+			<button type="button" on:click={challengeService.unlockFinalBoss} class="inline-flex items-center rounded-md bg-indigo-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-400" disabled={!challenge3Enabled}>Unlock Final Challenge</button>
 		</div>
 	{/if}
 
 {#if $challenge2Enabled}
 	<section class="h-[300px] w-screen flex items-center justify-center">
-		<form method="POST" action="?/logentry" class="w-1/2" use:enhance={submitChallenge2}>
+		<!-- CHALLENGE 2 HINT: Am I getting all the data from my form? -->
+		<form method="POST" class="w-1/2" use:enhance={challengeService.submitChallenge2}>
 			<div class="isolate -space-y-px rounded-md shadow-sm">
 				<div class="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
 					<label for="title" class="block text-xs font-medium text-gray-900">Title</label>
@@ -46,11 +45,11 @@
 				</div>
 				<div class="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
 					<label for="description" class="block text-xs font-medium text-gray-900">Description</label>
-					<input type="text" name="description" id="description" class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="What's the general idea here?">
+					<input type="text" class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="What's the general idea here?">
 				</div>
 				<div class="overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
 					<label for="body" class="sr-only">How are you feeling?</label>
-					<textarea rows="3" name="body" id="body" class="block w-full resize-none border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="How are you feeling?"></textarea>
+					<textarea rows="3" class="block w-full resize-none border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="How are you feeling?"></textarea>
 					<div class="py-2" aria-hidden="true">
 					<div class="py-px">
 						<div class="h-9"></div>

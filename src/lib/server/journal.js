@@ -1,6 +1,9 @@
 import { entries } from './database';
 
-//GET OUTTA HERE!!!
+//DO NOT MODIFY... unless you want to break everything!
+
+//But if you must know... Files behind a /server directory are protected by SvelteKit!
+//Just try importing one of these bad boys in a +page.svelte and see how it yells at you.
 
 function getEntryById(id, url) {
 	return new Promise((resolve, reject) => {

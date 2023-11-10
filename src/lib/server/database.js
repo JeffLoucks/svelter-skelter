@@ -1,3 +1,5 @@
+//DO NOT MODIFY... unless you want to break everything!
+
 const entries = [
 		{
 			title: "Challenge 1",
