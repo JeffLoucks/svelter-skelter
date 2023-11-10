@@ -3,9 +3,9 @@
 	import { localEntries, challenge2Enabled } from '$lib/client/local-state.js';
 	import { submitChallenge2, loadDashboard, unlockFinalBoss } from '$lib/client/challenge-service.js';
 	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
 
 	export let data;
+	export let form;
 
 	onMount(() => {
 		//onMount assures code is running the browser
@@ -61,6 +61,9 @@
 			<div class="mt-4 flex justify-end">
 				<button type="submit" class="inline-flex items-center rounded-md bg-indigo-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Log to server</button>
 			</div>
+			{#if form?.error}
+				<div class="absolute text-red-700">{form.error}</div>
+			{/if}
 		</form>
 	</section>
 {/if}
